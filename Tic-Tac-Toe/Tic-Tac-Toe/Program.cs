@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,8 +25,15 @@ namespace Tic_Tac_Toe
             string boardBase = String.Format("\n\n------------\n {0} | {1} | {2}\n------------\n {3} | {4} | {5}\n------------\n {6} | {7} | {8}\n------------\n", board[0, 0], board[0, 1], board[0, 2], board[1, 0], board[1, 1], board[1, 2], board[2, 0], board[2, 1], board[2, 2]);
             Console.WriteLine(boardBase);
 
-            Console.Write("Player X choose your field: ");
-            char player_x = Console.ReadKey().KeyChar;
+            bool valid = false;
+            char player_x = default;
+            while (!valid)
+            {
+                Console.Write("\nPlayer X choose your field: ");
+                player_x = Console.ReadKey().KeyChar;
+                valid = validPlacement(player_x, board);
+            } 
+            
             fieldMarkerX(player_x,ref board);
             printBoard(board);
 
@@ -75,9 +83,10 @@ namespace Tic_Tac_Toe
                 case '9':
                     board[2, 2] = 'X';
                     break;
+
             }
         }
-        static void fieldMarkerO(int number, ref char[,] board)
+        static void fieldMarkerO(char number, ref char[,] board)
         {
             switch (number)
             {
@@ -108,6 +117,37 @@ namespace Tic_Tac_Toe
                 case '9':
                     board[2, 2] = 'O';
                     break;
+
+            }
+        }
+
+        static bool validPlacement(char number, char[,] board)
+        {
+            switch(number)
+            {
+                case '1':
+                    return (board[0, 0] == '1' ? true : false);
+                case '2':
+                    return (board[0, 1] == '2' ? true : false);
+                case '3':
+                    return (board[0, 2] == '3' ? true : false);
+                case '4':
+                    return (board[1, 0] == '4' ? true : false);
+                case '5':
+                    return (board[1, 1] == '5' ? true : false);
+                case '6':
+                    return (board[1, 2] == '6' ? true : false);
+                case '7':
+                    return (board[2, 0] == '7' ? true : false);
+                case '8':
+                    return (board[2, 1] == '8' ? true : false);
+                case '9':
+                    return (board[2, 2] == '9' ? true : false);
+                default:
+                    Console.WriteLine("\nWrong Input, try again");
+                    return false;
+
+
             }
         }
             
