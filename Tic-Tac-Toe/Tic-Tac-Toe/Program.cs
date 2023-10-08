@@ -36,11 +36,27 @@ namespace Tic_Tac_Toe
             
             fieldMarkerX(player_x,ref board);
             printBoard(board);
+            if (x_win(board))
+            {
+                Console.WriteLine("\nPlayer X won");
+                return;
+            }
+            bool valid2 = false;
+            char player_o = default;
+            while (!valid2)
+            {
+                Console.Write("\nPlayer O choose your field: ");
+                player_o = Console.ReadKey().KeyChar;
+                valid2 = validPlacement(player_o, board);
+            }
 
-            Console.Write("Player O choose your field: ");
-            char player_o = Console.ReadKey().KeyChar;
             fieldMarkerO(player_o, ref board);
             printBoard(board);
+            if (o_win(board))
+            {
+                Console.WriteLine("\nPlayer O won");
+                return;
+            }   
 
             game(ref board);
 
@@ -150,6 +166,42 @@ namespace Tic_Tac_Toe
 
             }
         }
-            
+
+        static bool x_win(char[,] board)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if ((board[0, i] == 'X' && board[1, i] == 'X' && board[2, i] == 'X') || board[i, 0] == 'X' && board[i, 1] == 'X' && board[i, 2] == 'X')
+                {
+                    return true;
+                }
+            }
+
+            if ((board[0, 0] == 'X' && board[1, 1] == 'X' && board[2, 2] == 'X') || board[0, 2] == 'X' && board[1, 1] == 'X' && board[2, 0] == 'X')
+            {
+                return true;
+            }
+            return false;
+        }
+
+        static bool o_win(char[,] board)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if ((board[0, i] == 'O' && board[1, i] == 'O' && board[2, i] == 'O') || board[i, 0] == 'O' && board[i, 1] == 'O' && board[i, 2] == 'O')
+                {
+                    return true;
+                }
+
+            }
+
+            if ((board[0, 0] == 'O' && board[1, 1] == 'O' && board[2, 2] == 'O') || board[0, 2] == 'O' && board[1, 1] == 'O' && board[2, 0] == 'O')
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }
