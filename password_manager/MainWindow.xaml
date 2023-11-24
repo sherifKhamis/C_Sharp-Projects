@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:password_manager"
         mc:Ignorable="d"
-        Title="Password Manager" Height="450" Width="800">
+        Title="Password Manager" Height="450" Width="800" Background="Gray" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -17,6 +17,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Column="1" FontSize="30" VerticalAlignment="Center" >Password Manager</Label>
+        <Label Grid.Column="1" FontSize="30" VerticalAlignment="Center" Foreground="White">Password Manager</Label>
+        <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" FontSize="20" Foreground="White" TextAlignment="Center">
+            Please enter your Password.</TextBlock>
+        <PasswordBox Name="Enter_pwbox" Grid.Column="1" Grid.Row="1" Height="30" Width="150" FontSize="20"/>
+        <Button Name="Enter_btn" Grid.Column="1" Grid.Row="2" Height="50" Width="100" VerticalAlignment="Top" Background="LightGray" Foreground="black" PreviewMouseLeftButtonDown="enter_btn_clicked"> Enter </Button>
     </Grid>
 </Window>

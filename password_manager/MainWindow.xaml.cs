@@ -19,6 +19,21 @@ namespace password_manager
         public MainWindow()
         {
             InitializeComponent();
+
+        }
+
+        public bool get_passwordEntry ()
+        {
+            string passwordEntry = Enter_pwbox.Password;
+            if (passwordEntry == "Passwort")
+                return true;
+            return false;
+        }
+
+        public void enter_btn_clicked(object sender, RoutedEventArgs e)
+        {
+            if (get_passwordEntry() == false)
+                MessageBox.Show("Wrong password, try again!");
         }
     }
 }
