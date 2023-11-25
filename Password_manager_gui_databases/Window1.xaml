@@ -8,6 +8,17 @@
         Title="Password Manager" Height="450" Width="800" Background="Gray"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label FontSize="30" VerticalAlignment="Center" Foreground="White" Grid.ColumnSpan="3" Margin="133,0,133,0" HorizontalContentAlignment="Center">Choose your account</Label>
+        <ListBox Name="ListBox_Accounts" Grid.Row="1" Margin="25,25,25,25" Grid.RowSpan="2"/>
     </Grid>
 </Window>
