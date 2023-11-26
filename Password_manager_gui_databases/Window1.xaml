@@ -19,6 +19,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label FontSize="30" VerticalAlignment="Center" Foreground="White" Grid.ColumnSpan="3" Margin="133,0,133,0" HorizontalContentAlignment="Center">Choose your account</Label>
-        <ListBox Name="ListBox_Accounts" Grid.Row="1" Margin="25,25,25,25" Grid.RowSpan="2"/>
+        <ListBox Name="ListBox_Accounts" SelectionChanged="ListBox_Accounts_SelectionChanged" Background="Gray" BorderThickness="5" BorderBrush="White" Foreground="White" Margin="25,135,25,0" Grid.RowSpan="3" Height="239" VerticalAlignment="Top"/>
+        <ListBox Name="ListBox_Passwords" FontSize="20" Background="Gray" BorderThickness="5" BorderBrush="White" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="25,25,25,25"/>
+        <Label Content="Accounts" FontSize="15" HorizontalContentAlignment="Center" Foreground="White" Grid.ColumnSpan="2" Margin="0,102,266,0" Height="33" VerticalAlignment="Top"/>
+        <Label Grid.Column="1" Grid.Row="1" Content="Passwords" FontSize="15" Height="30" HorizontalContentAlignment="Center" VerticalAlignment="Top" Foreground="White"/>
+        <Button Name="Add_Password_Btn" Grid.Column="2" Grid.Row="2" Height="30" VerticalAlignment="Top" Background="LightGray" Foreground="black" PreviewMouseLeftButtonDown="Add_Password_Btn_clicked" Margin="10,10,147,0" >Add Password</Button>
+        <Button Name="Dlt_Password_Btn" Grid.Column="2" Grid.Row="2" Height="30" VerticalAlignment="Top" Background="LightGray" Foreground="black" PreviewMouseLeftButtonDown="Dlt_Password_Btn_clicked" Margin="134,10,23,0" >Delete Password</Button>
+        <Button Name="Add_Account_Btn" Grid.Column="2" Grid.Row="1" Height="30" VerticalAlignment="Top" Background="LightGray" Foreground="black" PreviewMouseLeftButtonDown="Add_Account_Btn_clicked" Margin="10,104,147,0" >Add Account</Button>
+        <Button Name="Dlt_Account_Btn" Grid.Column="2" Grid.Row="1" Height="30" VerticalAlignment="Top" Background="LightGray" Foreground="black" PreviewMouseLeftButtonDown="Dlt_Account_Btn_clicked" Margin="134,104,28,0" RenderTransformOrigin="0.5,0.5" Content="Delete Account"/>
+        <TextBox Name="TextBox" Grid.Column="2" HorizontalAlignment="Center" Height="51" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="247"/>
+
+
     </Grid>
 </Window>

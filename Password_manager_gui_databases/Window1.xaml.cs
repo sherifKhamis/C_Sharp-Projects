@@ -43,9 +43,85 @@ namespace Password_manager_gui_databases
                 sqlDataAdapter.Fill(AccountTable);
 
                 ListBox_Accounts.DisplayMemberPath = "Account";
+                ListBox_Accounts.SelectedValuePath = "Id";
                 ListBox_Accounts.ItemsSource = AccountTable.DefaultView;
             }
 
+        }
+
+        private void showPasswords()
+        {
+            string query = "select * from Passwords p inner join Password_Manager pm on p.Id = pm.PasswordID where pm.AccountID = @AccountID";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);   
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+            using (sqlDataAdapter)
+            {
+                sqlCommand.Parameters.AddWithValue("@AccountID", ListBox_Accounts.SelectedValue);
+                DataTable PasswordTable = new DataTable();
+
+                sqlDataAdapter.Fill(PasswordTable);
+
+                ListBox_Passwords.DisplayMemberPath = "Password";
+                ListBox_Passwords.SelectedValuePath = "Id";
+                ListBox_Passwords.ItemsSource = PasswordTable.DefaultView;
+            }
+
+        }
+
+        void ListBox_Accounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            showPasswords();
+        }
+
+        private void Dlt_Account_Btn_clicked(object sender, RoutedEventArgs e)
+        {
+            string query = "delete from Accounts where id = @AccountID";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.Parameters.AddWithValue("@AccountID", ListBox_Accounts.SelectedValue);
+            sqlCommand.ExecuteScalar();
+            sqlConnection.Close();
+            ListBox_Accounts.UnselectAll();
+            ListBox_Accounts.Items.Clear();
+        }
+
+        private void Add_Account_Btn_clicked(object sender, RoutedEventArgs e)
+        {
+            string query = "insert into Accounts values (@Account)";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.Parameters.AddWithValue("@Account", TextBox.Text);
+            sqlCommand.ExecuteScalar();
+            sqlConnection.Close();
+            showAccounts();
+        }
+
+        private void Add_Password_Btn_clicked(object sender, RoutedEventArgs e)
+        {
+            string query = "insert into Passwords values (@Password, @Id)";
+            //string query2 = "insert into Password_Manager values (@AccountID)";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            //SqlCommand sqlCommand2 = new SqlCommand(query2, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.Parameters.AddWithValue("@Password", TextBox.Text);
+            sqlCommand.Parameters.AddWithValue("@Id", ListBox_Accounts.SelectedValuePath);
+            //sqlCommand2.Parameters.AddWithValue("AccountID", ListBox_Accounts.SelectedValue);
+            sqlCommand.ExecuteScalar();
+            //sqlCommand2.ExecuteScalar();
+            sqlConnection.Close();
+            
+        }
+
+        private void Dlt_Password_Btn_clicked(object sender, RoutedEventArgs e)
+        {
+            string query = "delete from Passwords where id = @PasswordID";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.Parameters.AddWithValue("@PasswordID", ListBox_Passwords.SelectedValue);
+            sqlCommand.ExecuteScalar();
+            sqlConnection.Close();
+            showPasswords();
         }
     }
 }
